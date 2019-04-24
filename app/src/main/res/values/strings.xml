@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="app_name">Calculator</string>
+    <string name="editText_op1">Operand 1 </string>
+    <string name="editText_op2">Operand 2</string>
+    <string name="op1_hint">Operand 1</string>
+    <string name="op2_hint">Operand 2</string>
+    <string name="result_label_text">Result</string>
+    <string name="textView_result">output</string>
+    <string name="op_plus_text"> + </string>
+    <string name="op_minus_text"> - </string>
+    <string name="op_div_text"> / </string>
+    <string name="op_mult_text"> x </string>
+    <string name="op_pct_text"> % </string>
+    <string name="op_sprt_text"> sqrt </string>
+
+</resources>
