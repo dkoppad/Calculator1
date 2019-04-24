@@ -1,9 +1,16 @@
+/*
+ * @author Dhakshayini Koppad (dkoppad@pdx.edu), 2019
+ *
+ * * * This is a mini calculator app which performs the following mathematical operations
+ * * Addition, Subtraction, Multipy, Division, Percentage of a no. and Square root.
+ * * The app also few toast messages when any one of the operand is missing or
+ * * any invalid input is entered.
+ * */
+
 package edu.pdx.www.calculator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,13 +47,12 @@ public class MainActivity extends AppCompatActivity {
         div = (Button)findViewById(R.id.button_op_div);
         sqrt = (Button)findViewById(R.id.button_op_sqrt);
 
-
+        // function to calculate the add of two numbers
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View v) {
 
-                if (!isValidInput(true,true)){
+                if (!isValidInput(true, true)){
                     Toast.makeText(MainActivity.this,
                             "Input Error: operand missing",
                             Toast.LENGTH_SHORT).show();
@@ -61,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // function to calculate the subtract of two numbers
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // function to calculate the Multipy of two numbers
         mult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // function to calculate the division of two numbers
 
         div.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,12 +138,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // function to calculate the % of a number
+
         pct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (!isValidInput(true,false)){
-                    Toast.makeText(MainActivity.this,
+                if (!isValidInput(true,false)){         // operand a should be valid
+                    Toast.makeText(MainActivity.this,            // and operand B is optional
                             "Input Error: operand missing",
                             Toast.LENGTH_SHORT).show();
                     clear_input();
@@ -147,12 +159,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // function to calculate the Square root of a number
+
         sqrt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (!isValidInput(true,false)){
-                    Toast.makeText(MainActivity.this,
+                if (!isValidInput(true,false)){         // operand a should be valid
+                    Toast.makeText(MainActivity.this,           // and operand B is optional
                             "Input Error: operand missing",
                             Toast.LENGTH_SHORT).show();
                     clear_input();
@@ -166,6 +180,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    // Override the Activity lifecycle callbacks for logging
 
     @Override public void onStart() {
         super.onStart();
@@ -191,38 +207,48 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Log.d(TAG, "onDestroy() called");
     }
+
+    /** * Clears the input text edit boxes */
+
     private void clear_input() {
         op1.setText("");
         op2.setText("");
     }
+
+    //Checks if the required input strings are valid.
+    //The caller passes in parameters * to specify which values to check.
+
+    // NeedA is true if the calculation needs a valid OperandA String
+    // NeedB is true if the calculation needs a valid Operandb String
+
     private boolean isValidInput(boolean NeedA, boolean NeedB) {
         boolean result = true;
         String OperandA = op1.getText().toString();
         String OperandB = op2.getText().toString();
 
-        if (NeedA) {
-            if ((OperandA.length() == 0)) {
+        result = isValidDot();                      // Checks if the input is not a "."
+
+        if ((NeedA) && (OperandA.length() == 0)) {     // Checks if Operand A is valid
+
                 result = false;
-            }
-            else if (OperandA == "."){
-                result = false;
-            }
-            else {
-                result = true;
-            }
         }
-         if (NeedB) {
-             if ((OperandB.length()==0)){
-                 result = false;
-             }
-             else if (OperandB == "."){
-                 result = false;
-             }
-             else {
-                 result = true;
-             }
-         }
+        if ((NeedB )&&(OperandB.length() == 0)) {       // Checks if Operand A is valid
+                result = false;
+        }
         return result;
+    }
+
+    // Function to check if ".", to pop up toast msg for both operands
+    //
+    private boolean isValidDot() {
+        boolean result_dot = true;
+        String OpA = op1.getText().toString();
+        String OpB = op2.getText().toString();
+
+            if ((OpA.equals("."))||(OpB.equals("."))) {
+                result_dot = false;
+            }
+        return result_dot;
     }
 
 }
